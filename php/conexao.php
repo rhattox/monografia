@@ -2,9 +2,9 @@
 include("enviaGET.php");
 // Create a cURL handle
 $ch = curl_init('http://node:5000');
-$cores = array('azul','vermelho','branco','preto','roxo','laranja','rosa','lilas','verde','amarelo','cinza');
-$execucoes = 1;
-    while ($execucoes <= 10){
+$cores = array('red','orange','yellow','green','blue','indigo','violet');
+$execucoes = 0;
+    while ($execucoes <= 6){
         // Execute
         curl_exec($ch);
 
@@ -13,8 +13,9 @@ $execucoes = 1;
         if($http_code != 0){
             echo "\nResposta HTTP: $http_code";
             if($http_code == 200){
-                echo "\tTudo certo! Começo do script de comunicação...\n";
-                manda_mensagem($cores[$execucoes]);
+                // echo "\tTudo certo! Começo do script de comunicação...\n";
+                $resposta = manda_mensagem($cores[$execucoes]);
+                echo $resposta;
             }
         }else{
             echo "\nServidor offline --> HTTP: $http_code \n";

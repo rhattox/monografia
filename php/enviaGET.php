@@ -6,7 +6,7 @@ function manda_mensagem($parametro){
     // Set some options - we are passing in a useragent too here
     curl_setopt_array($curl, array(
         CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => "http://node:5000/sms?param1=$parametro",
+        CURLOPT_URL => "http://node:5000/monografia?param1=$parametro",
         CURLOPT_USERAGENT => 'User Agent X'
     ));
 
