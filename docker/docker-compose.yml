@@ -1,29 +1,36 @@
 version: '3.9'
 services:
   php:
-    image: php:cli-alpine3.14
-    volumes:
-      - "../php:/home"
-    tty: true
- 
+    image: monografia_php
+    # image: php:cli-alpine3.14
+    build: "./php"
+    # volumes:
+    #   - "../php:/home"
+    # entrypoint: ["php", "/home/conexao.php"]
+    depends_on: 
+      - "node"
+
+
   node:
-    image: node:16.6-alpine3.14
+    # image: node:16.6-alpine3.14
+    image: monografia_node
+    build: "./node"
     ports:
       - 80:5000
-    volumes:
-      - "../node:/home/"
-    tty: true
+    # volumes:
+    #   - "../node:/home/"
+    # entrypoint: ["node", "/home/server.js"]
     
-  mysql:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: teste
-    volumes:
-      - "../mysql:/var/lib/mysql"
+  # mysql:
+  #   image: mysql:8.0
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: teste
+  #   volumes:
+  #     - "../mysql:/var/lib/mysql"
   
-  adminer: 
-    image: adminer:4.8.1
-    restart: always
-    ports:
-      - 8080:8080
+  # adminer: 
+  #   image: adminer:4.8.1
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
