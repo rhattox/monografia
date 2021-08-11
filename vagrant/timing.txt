@@ -1,0 +1,4 @@
+Começo da instalação do ansible: Wed Aug 11 21:02:27 UTC 2021
+finalização da instalação Wed Aug 11 21:02:53 UTC 2021
+Começo do deploy das ferramentas: Wed Aug 11 21:02:53 UTC 2021
+Finalização do deploy das ferramentas: Wed Aug 11 21:02:54 UTC 2021 

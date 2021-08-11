@@ -1,13 +1,13 @@
 ---
-- name: "Update repositório ubuntu"
+- name: "Unzip npm php"
   become: true
-  shell: apt-get update -y
+  shell: tar -xvf /vagrant/instaladores/vm.tar -C /var/cache/apt/archives/
 
-- name: "Install PHP"
+- name: "Install php npm"
   become: true
-  shell: apt-get install -y php
+  shell: apt-get install -y php7.4-fpm nodejs php-curl
 
-- name: "Install PHP"
+- name: "finalizado instalação das vms"
   become: true
-  shell: apt-get install -y node
+  shell: "echo finalização da instalação $(date) >> /vagrant/timing.txt"
 
