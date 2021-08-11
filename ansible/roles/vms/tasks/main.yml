@@ -1,0 +1,13 @@
+---
+- name: "Update repositório ubuntu"
+  become: true
+  shell: apt-get update -y
+
+- name: "Install PHP"
+  become: true
+  shell: apt-get install -y php
+
+- name: "Install PHP"
+  become: true
+  shell: apt-get install -y node
+

@@ -1,0 +1,29 @@
+Vagrant.configure("2") do |config|
+    #docker
+    config.vm.define "docker" do |docker|
+        docker.vm.box = "ubuntu/focal64"
+        # manager.vm.synced_folder "./ansible", "/vagrant", disabled: false
+        docker.vm.synced_folder "./ansible", "/vagrant", disabled: false
+        docker.vbguest.no_remote = true
+        docker.vbguest.auto_update = false
+        docker.vm.network "public_network", ip: "192.168.1.20"
+        docker.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "docker"
+        end
+    end
+
+    config.vm.define "vm" do |vm|
+        vm.vm.box = "ubuntu/focal64"
+        # manager.vm.synced_folder "./ansible", "/vagrant", disabled: false
+        vm.vm.synced_folder "./ansible", "/vagrant", disabled: false
+        vm.vbguest.no_remote = true
+        vm.vbguest.auto_update = false
+        vm.vm.network "public_network", ip: "192.168.1.21"
+        vm.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "vm"
+        end
+    end
