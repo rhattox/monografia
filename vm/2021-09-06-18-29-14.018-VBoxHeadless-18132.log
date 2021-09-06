@@ -1,0 +1,12 @@
+Log created: 2021-09-06T18:29:14.187258000Z
+Process ID:  18132 (0x46d4)
+Parent PID:  1 (0x1)
+Executable:  /usr/lib/virtualbox/VBoxHeadless
+Arg[0]: /usr/lib/virtualbox/VBoxHeadless
+Arg[1]: --comment
+Arg[2]: app_suitecrm
+Arg[3]: --startvm
+Arg[4]: a1362f7b-ce10-4424-b6a6-84666e51a93c
+Arg[5]: --vrde
+Arg[6]: config
+AddRef: illegal refcnt=3221225469 state=2

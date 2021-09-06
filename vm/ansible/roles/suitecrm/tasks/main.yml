@@ -1,0 +1,4 @@
+---
+- name: "Instalação mysql"
+  become: true
+  shell: apt-get install mysql
