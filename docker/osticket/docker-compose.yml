@@ -1,7 +1,5 @@
-version: '3'
-
+version: '3.9'
 services:
-
   osticket:
     build: .
     image: osticket/osticket
@@ -10,18 +8,14 @@ services:
       - MYSQL_DATABASE=osticket
       - MYSQL_USER=osticket
       - MYSQL_PASSWORD=0T1cket
-
       # CHANGE ME
       - INSTALL_SECRET=secret
-
       - LANGUAGE=fa
-
     links:
       - mysql:mysql
     ports:
       - "5335:80"
     restart: always
-
   mysql:
     image: mariadb
     environment:

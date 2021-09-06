@@ -1,0 +1,60 @@
+
+FIM
+
+Rodada:  18
+Linux 5.4.0-81-generic (dev) 	09/05/2021 	_x86_64_	(2 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           3.92    0.01    3.76    5.84    0.00   86.47
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+dm-0            233.17       432.11      2970.67         0.00    1020665    7016852          0
+loop0             0.02         0.14         0.00         0.00        336          0          0
+loop1             0.03         0.46         0.00         0.00       1083          0          0
+loop2             5.56         5.68         0.00         0.00      13424          0          0
+loop3             0.63         0.76         0.00         0.00       1793          0          0
+loop4             0.00         0.00         0.00         0.00          4          0          0
+sda              81.21       436.75      2948.91         0.00    1031630    6965448          0
+
+
+
+FIM
+
+Rodada:  19
+Linux 5.4.0-81-generic (dev) 	09/05/2021 	_x86_64_	(2 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           3.91    0.01    3.74    5.82    0.00   86.52
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+dm-0            232.40       430.29      2958.99         0.00    1020665    7018880          0
+loop0             0.02         0.14         0.00         0.00        336          0          0
+loop1             0.03         0.46         0.00         0.00       1083          0          0
+loop2             5.53         5.66         0.00         0.00      13424          0          0
+loop3             0.63         0.76         0.00         0.00       1793          0          0
+loop4             0.00         0.00         0.00         0.00          4          0          0
+sda              80.87       434.91      2937.32         0.00    1031630    6967468          0
+
+
+
+FIM
+
+Rodada:  20
+Linux 5.4.0-81-generic (dev) 	09/05/2021 	_x86_64_	(2 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           3.89    0.01    3.73    5.79    0.00   86.58
+
+Device             tps    kB_read/s    kB_wrtn/s    kB_dscd/s    kB_read    kB_wrtn    kB_dscd
+dm-0            231.42       428.48      2946.57         0.00    1020665    7018900          0
+loop0             0.02         0.14         0.00         0.00        336          0          0
+loop1             0.03         0.45         0.00         0.00       1083          0          0
+loop2             5.51         5.64         0.00         0.00      13424          0          0
+loop3             0.63         0.75         0.00         0.00       1793          0          0
+loop4             0.00         0.00         0.00         0.00          4          0          0
+sda              80.54       433.08      2924.98         0.00    1031630    6967484          0
+
+
+
+FIM
+
