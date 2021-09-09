@@ -38,14 +38,30 @@
 #     host: "{{ ansible_fqdn }}"
 #     state: absent
 
-- name: Cópia de configuração para habilitar 0.0.0.0 e porta 3306
-  become: yes
-  ansible.builtin.copy:
-    src: files/my.cnf
-    dest: /etc/alternatives/my.cnf
-    owner: root
-    group: root
-    mode: '0777'
+# - name: Cópia de configuração para habilitar 0.0.0.0 e porta 3306
+#   become: yes
+#   ansible.builtin.copy:
+#     src: files/my.cnf
+#     dest: /etc/alternatives/my.cnf
+#     owner: root
+#     group: root
+#     mode: '0777'
+
+- name: Permite acesso 0.0.0.0
+  become: true 
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: "bind-address            = 127.0.0.1"
+    line: "bind-address            = 0.0.0.0"
+    state: present
+
+- name: Permite porta 3306
+  become: true 
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: "#port                   = 3306"
+    line: "port                   = 3306"
+    state: present
 
 - name: Reinicio do serviço MariaDB para aplicação de mudanças
   become: true
@@ -70,3 +86,5 @@
     - GRANT ALL ON suitecrm.* to '{{ mysql_root_user }}'@'{{ suitecrm_ip }}' IDENTIFIED BY '{{ mysql_root_password }}';
     - FLUSH PRIVILEGES;
     single_transaction: yes
+
+
