@@ -47,8 +47,8 @@
     group: root
     mode: '0644'
 
-- name: Reload service httpd, in all cases
+- name: Reload systemd httpd, in all cases
   become: true
-  ansible.builtin.service:
-    name: mariadb
-    state: reloaded
+  ansible.builtin.systemd:
+    name: mariadb.service
+    state: restarted
