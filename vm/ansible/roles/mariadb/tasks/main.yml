@@ -1,9 +1,9 @@
 ---
-- name: update repositorio
+- name: Atualização do repositório ubuntu
   become: true
   shell: apt-get update -y
 
-- name: install mariadb
+- name: Instalação do MariaDB
   become: true
   apt:
     name:
@@ -11,19 +11,19 @@
       - python3-mysqldb
     state: latest
 
-- name: start mariadb
+- name: Inicialização do serviço MariaDB
   become: true
   service:
     name: mariadb
     enabled: true
     state: started
 
-- name: mysql_root_password
+- name: Definição do usuário mysql
   become: true
   mysql_user:
-    login_user: root
+    login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
-    user: root
+    user: "{{ mysql_root_user }}"
     check_implicit_admin: true
     password: "{{ mysql_root_password }}"
     host: localhost
@@ -38,7 +38,7 @@
 #     host: "{{ ansible_fqdn }}"
 #     state: absent
 
-- name: Copy my.cnf
+- name: Cópia de configuração para habilitar 0.0.0.0 e porta 3306
   become: yes
   ansible.builtin.copy:
     src: files/my.cnf
@@ -47,26 +47,26 @@
     group: root
     mode: '0777'
 
-- name: Reload systemd httpd, in all cases
+- name: Reinicio do serviço MariaDB para aplicação de mudanças
   become: true
   ansible.builtin.systemd:
     name: mariadb.service
     state: restarted
 
-- name: Create a new database with name suitecrm
+- name: Cria uma nova base com o nome "suitecrm"
   become: true
   community.mysql.mysql_db:
-    login_user: root
+    login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
     name: suitecrm
     state: present
 
-- name: Run several insert queries against db test_db in single transaction
-  become: true
+- name: Garante privilégio de conexão para o usuário  "{{ mysql_root_user }}"  vindo do IP {{ suitecrm_ip }}
+  become: true 
   community.mysql.mysql_query:
-    login_user: root
+    login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
     query: 
-    - GRANT ALL ON suitecrm.* to 'root'@'192.168.1.41' IDENTIFIED BY 'teste123';
+    - GRANT ALL ON suitecrm.* to '{{ mysql_root_user }}'@'{{ suitecrm_ip }}' IDENTIFIED BY '{{ mysql_root_password }}';
     - FLUSH PRIVILEGES;
     single_transaction: yes

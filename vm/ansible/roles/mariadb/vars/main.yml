@@ -1,2 +1,4 @@
 ---
-mysql_root_password: teste123
+mysql_root_password: a1b2c3d4
+mysql_root_user: root
+suitecrm_ip: 192.168.1.41
