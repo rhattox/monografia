@@ -1,0 +1,54 @@
+---
+- name: update repositorio
+  become: true
+  shell: apt-get update -y
+
+- name: install mariadb
+  become: true
+  apt:
+    name:
+      - mariadb-server
+      - python3-mysqldb
+    state: latest
+
+- name: start mariadb
+  become: true
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: mysql_root_password
+  become: true
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    user: root
+    check_implicit_admin: true
+    password: "{{ mysql_root_password }}"
+    host: localhost
+
+# - name: remove remote root
+#   become: true
+#   mysql_user:
+#     check_implicit_admin: true
+#     login_user: root
+#     login_password: "{{ mysql_root_password }}"
+#     user: root
+#     host: "{{ ansible_fqdn }}"
+#     state: absent
+
+- name: Copy 50-server.cnf
+  become: yes
+  ansible.builtin.copy:
+    src: files/50-server.cnf
+    dest: /etc/mysql/mariadb.conf.d/
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Reload service httpd, in all cases
+  become: true
+  ansible.builtin.service:
+    name: mariadb
+    state: reloaded
