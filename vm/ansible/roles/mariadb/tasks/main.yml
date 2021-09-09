@@ -38,17 +38,35 @@
 #     host: "{{ ansible_fqdn }}"
 #     state: absent
 
-- name: Copy 50-server.cnf
+- name: Copy my.cnf
   become: yes
   ansible.builtin.copy:
-    src: files/50-server.cnf
-    dest: /etc/mysql/mariadb.conf.d/
+    src: files/my.cnf
+    dest: /etc/alternatives/my.cnf
     owner: root
     group: root
-    mode: '0644'
+    mode: '0777'
 
 - name: Reload systemd httpd, in all cases
   become: true
   ansible.builtin.systemd:
     name: mariadb.service
     state: restarted
+
+- name: Create a new database with name suitecrm
+  become: true
+  community.mysql.mysql_db:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: suitecrm
+    state: present
+
+- name: Run several insert queries against db test_db in single transaction
+  become: true
+  community.mysql.mysql_query:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    query: 
+    - GRANT ALL ON suitecrm.* to 'root'@'192.168.1.41' IDENTIFIED BY 'teste123';
+    - FLUSH PRIVILEGES;
+    single_transaction: yes

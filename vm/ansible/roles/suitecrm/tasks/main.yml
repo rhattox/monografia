@@ -1,20 +1,20 @@
 ---
-- name: update repositorio
+- name: Atualização do repositório ubuntu
   become: true
   shell: apt-get update -y
 
-- name: install php, modulos, zip & apache
+- name: Instalação PHP "{{ php_version }}" (módulos) + Zip
   become: true
   apt:
     name:
-      - php7.4
+      - "{{ php_version }}"
       - zip
-      - php7.4-mysql
-      - php7.4-xml
-      - php7.4-zip
+      - "{{ php_version }}-mysql"
+      - "{{ php_version }}-xml"
+      - "{{ php_version }}-zip"
     state: latest
 
-- name: start apache2
+- name: Inicia o serviço do apache2
   become: true
   service:
     name: apache2
@@ -28,14 +28,14 @@
 #     dest: /root/suitecrm.zip
 #     mode: '0777'
 
-- name: Extract suitecrm.zip into /home/
+- name: Baixa o arquivo compactado do suitecrm e extrai para /home/
   become: true
   ansible.builtin.unarchive:
     src: https://suitecrm.com{{ suitecrm_url }}
     dest: /home/
     remote_src: yes
 
-- name: Copy file from /home/{{ suitecrm_version }}/ with owner and permissions to /var/www/html
+- name: Cópia da pasta /home/{{ suitecrm_version }}/ para a pasta /var/www/html/
   become: true
   ansible.builtin.copy:
     src: /home/{{ suitecrm_version }}/
@@ -55,7 +55,7 @@
 #     group: root
 #     mode: '0775'
 
-- name: Change file ownership, group and permissions /var/www/html/custom/
+- name: Atualização de permissões para a pasta /var/www/html/custom/
   become: true
   ansible.builtin.file:
     path: /var/www/html/custom/
@@ -63,10 +63,10 @@
     group: www-data
     mode: '0766'
 
-- name: Change file opermissions item.path
+- name: Definindo permissões para os diretórios "{{ item.path }}"
   become: true
   ansible.builtin.file:
-    path: '{{ item.path }}'
+    path: "{{ item.path }}"
     state: directory
     mode: '0777'
   loop:
@@ -77,7 +77,8 @@
     - { path: /var/www/html/cache/xml } 
     - { path: /var/www/html/cache/include/javascript }
 
-- name: Remove file (delete file) /var/www/html/index.html
+- name: Remove o arquivo /var/www/html/index.html
+  become: true
   ansible.builtin.file:
     path: /var/www/html/index.html
     state: absent
