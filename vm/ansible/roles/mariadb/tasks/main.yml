@@ -18,35 +18,6 @@
     enabled: true
     state: started
 
-- name: Definição do usuário mysql
-  become: true
-  mysql_user:
-    login_user: "{{ mysql_root_user }}"
-    login_password: "{{ mysql_root_password }}"
-    user: "{{ mysql_root_user }}"
-    check_implicit_admin: true
-    password: "{{ mysql_root_password }}"
-    host: localhost
-
-# - name: remove remote root
-#   become: true
-#   mysql_user:
-#     check_implicit_admin: true
-#     login_user: root
-#     login_password: "{{ mysql_root_password }}"
-#     user: root
-#     host: "{{ ansible_fqdn }}"
-#     state: absent
-
-# - name: Cópia de configuração para habilitar 0.0.0.0 e porta 3306
-#   become: yes
-#   ansible.builtin.copy:
-#     src: files/my.cnf
-#     dest: /etc/alternatives/my.cnf
-#     owner: root
-#     group: root
-#     mode: '0777'
-
 - name: Permite acesso 0.0.0.0
   become: true 
   lineinfile:
@@ -63,28 +34,32 @@
     line: "port                   = 3306"
     state: present
 
-- name: Reinicio do serviço MariaDB para aplicação de mudanças
-  become: true
-  ansible.builtin.systemd:
-    name: mariadb.service
-    state: restarted
-
 - name: Cria uma nova base com o nome "suitecrm"
   become: true
   community.mysql.mysql_db:
-    login_user: "{{ mysql_root_user }}"
-    login_password: "{{ mysql_root_password }}"
-    name: suitecrm
+    name: '{{ mysql_suitecrm_database }}'
+    state: present
+
+- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+  become: true
+  community.mysql.mysql_user:
+    name: '{{ mysql_user }}'
+    password: '{{ mysql_password }}'
+    priv: '*.*:ALL,GRANT'
     state: present
 
 - name: Garante privilégio de conexão para o usuário  "{{ mysql_root_user }}"  vindo do IP {{ suitecrm_ip }}
   become: true 
   community.mysql.mysql_query:
-    login_user: "{{ mysql_root_user }}"
-    login_password: "{{ mysql_root_password }}"
+    login_user: '{{ mysql_user }}'
+    login_password: '{{ mysql_password }}'
     query: 
-    - GRANT ALL ON suitecrm.* to '{{ mysql_root_user }}'@'{{ suitecrm_ip }}' IDENTIFIED BY '{{ mysql_root_password }}';
+    - GRANT ALL ON suitecrm.* to '{{ mysql_user }}'@'%' IDENTIFIED BY '{{ mysql_password }}';
     - FLUSH PRIVILEGES;
     single_transaction: yes
 
-
+- name: Reinicio do serviço MariaDB para aplicação de mudanças
+  become: true
+  ansible.builtin.systemd:
+    name: mariadb.service
+    state: restarted

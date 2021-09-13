@@ -1,0 +1,87 @@
+Começo dos testes DEPLOY (ANSIBLE) em: 2021-09-13 às 19:23:44
+Remoção de arquivos de HOST em: /home/dev/.ssh/known_hosts: 2021-09-13 às 19:23:44
+Sleep de 10s
+Deploy APP_SUITECRM ANSIBLE: 2021-09-13 às 19:23:55
+
+PLAY [suitecrm] **************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************
+ok: [192.168.1.41]
+
+TASK [suitecrm : Atualização do repositório ubuntu] **************************************************************************
+[WARNING]: Consider using the apt module rather than running 'apt-get'.  If you need to use command because apt is
+insufficient you can add 'warn: false' to this command task or set 'command_warnings=False' in ansible.cfg to get rid of this
+message.
+changed: [192.168.1.41]
+
+TASK [suitecrm : Instalação PHP "php7.4" (módulos) + Zip] ********************************************************************
+changed: [192.168.1.41]
+
+TASK [suitecrm : Inicia o serviço do apache2] ********************************************************************************
+ok: [192.168.1.41]
+
+TASK [suitecrm : Baixa o arquivo compactado do suitecrm e extrai para /home/] ************************************************
+changed: [192.168.1.41]
+
+TASK [suitecrm : Cópia da pasta /home/SuiteCRM-7.11.21/ para a pasta /var/www/html/] *****************************************
+changed: [192.168.1.41]
+
+TASK [suitecrm : Atualização de permissões para a pasta /var/www/html/custom/] ***********************************************
+changed: [192.168.1.41]
+
+TASK [suitecrm : Definindo permissões para os diretórios "{{ item.path }}"] **************************************************
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/images'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/layout'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/pdf'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/xml'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/include/javascript'})
+
+TASK [suitecrm : Remove o arquivo /var/www/html/index.html] ******************************************************************
+changed: [192.168.1.41]
+
+PLAY RECAP *******************************************************************************************************************
+192.168.1.41               : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Deploy DB_SUITECRM ANSIBLE: 2021-09-13 às 19:25:48
+
+PLAY [mariadb] ***************************************************************************************************************
+
+TASK [Gathering Facts] *******************************************************************************************************
+ok: [192.168.1.40]
+
+TASK [mariadb : Atualização do repositório ubuntu] ***************************************************************************
+[WARNING]: Consider using the apt module rather than running 'apt-get'.  If you need to use command because apt is
+insufficient you can add 'warn: false' to this command task or set 'command_warnings=False' in ansible.cfg to get rid of this
+message.
+changed: [192.168.1.40]
+
+TASK [mariadb : Instalação do MariaDB] ***************************************************************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Inicialização do serviço MariaDB] ****************************************************************************
+ok: [192.168.1.40]
+
+TASK [mariadb : Permite acesso 0.0.0.0] **************************************************************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Permite porta 3306] ******************************************************************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Cria uma nova base com o nome "suitecrm"] ********************************************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Create database user with password and all database privileges and 'WITH GRANT OPTION'] **********************
+changed: [192.168.1.40]
+
+TASK [mariadb : Garante privilégio de conexão para o usuário  "{{ mysql_root_user }}"  vindo do IP {{ suitecrm_ip }}] ********
+ok: [192.168.1.40]
+
+TASK [mariadb : Reinicio do serviço MariaDB para aplicação de mudanças] ******************************************************
+changed: [192.168.1.40]
+
+PLAY RECAP *******************************************************************************************************************
+192.168.1.40               : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Sleep de 10s
+Finalização da rodada DE DEPLOY APP (suitecrm) e DB (mariaDB) em: 2021-09-13 às 19:27:01

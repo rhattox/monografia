@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
         db_suitecrm.vbguest.auto_update = false
         db_suitecrm.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.40"
         db_suitecrm.vm.provider "virtualbox" do |v|     
-            v.memory= 512
-            v.cpus = 1
+            v.memory= 2048
+            v.cpus = 2
             v.name = "db_suitecrm"
         end
     end
@@ -20,35 +20,9 @@ Vagrant.configure("2") do |config|
         app_suitecrm.vbguest.auto_update = false
         app_suitecrm.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.41"
         app_suitecrm.vm.provider "virtualbox" do |v|     
-            v.memory= 512
-            v.cpus = 1
+            v.memory= 2048
+            v.cpus = 2
             v.name = "app_suitecrm"
-        end
-    end
-    #db_osticket
-    config.vm.define "db_osticket" do |db_osticket|
-        db_osticket.vm.box = "ubuntu/focal64"
-        db_osticket.vm.synced_folder "db_osticket", "/vagrant", disabled: true
-        db_osticket.vbguest.no_remote = true
-        db_osticket.vbguest.auto_update = false
-        db_osticket.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.42"
-        db_osticket.vm.provider "virtualbox" do |v|     
-            v.memory= 512
-            v.cpus = 1
-            v.name = "db_osticket"
-        end
-    end
-    #app_osticket
-     config.vm.define "app_osticket" do |app_osticket|
-        app_osticket.vm.box = "ubuntu/focal64"
-        app_osticket.vm.synced_folder "app_osticket", "/vagrant", disabled: true
-        app_osticket.vbguest.no_remote = true
-        app_osticket.vbguest.auto_update = false
-        app_osticket.vm.network "public_network",  bridge: "enp0s31f6", ip: "192.168.1.43"
-        app_osticket.vm.provider "virtualbox" do |v|     
-            v.memory= 512
-            v.cpus = 1
-            v.name = "app_osticket"
         end
     end
 end
