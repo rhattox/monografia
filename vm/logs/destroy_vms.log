@@ -1,8 +1,0 @@
-Começo dos testes DESTROY em: 2021-09-13 às 19:20:10
-Inicialização DESTROY APP (suitecrm) em: 2021-09-13 às 19:20:10
-==> app_suitecrm: VM not created. Moving on...
-Sleep de 10s
-Inicialização DB (mariaDB) em: 2021-09-13 às 19:20:21
-==> db_suitecrm: VM not created. Moving on...
-Sleep de 10s
-Finalização da rodada CREATE APP (suitecrm) e DB (mariaDB) em: 2021-09-13 às 19:20:32

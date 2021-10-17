@@ -1,0 +1,42 @@
+Vagrant.configure("2") do |config|
+    config.vm.synced_folder "docker/", "/vagrant", :mount_options => ["dmode=777", "fmode=666"]
+    #manager
+    config.vm.define "manager" do |manager|
+        manager.vm.box = "ubuntu/focal64"
+        # manager.vm.synced_folder ".", "/vagrant", disabled: true
+        manager.vbguest.no_remote = true
+        manager.vbguest.auto_update = false
+        manager.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.50"
+        manager.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "manager"
+        end
+    end
+    #worker_1
+    config.vm.define "worker_1" do |worker_1|
+        worker_1.vm.box = "ubuntu/focal64"
+        # worker_1.vm.synced_folder ".", "/vagrant", disabled: true
+        worker_1.vbguest.no_remote = true
+        worker_1.vbguest.auto_update = false
+        worker_1.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.51"
+        worker_1.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "worker_1"
+        end
+    end
+ #worker_2
+    config.vm.define "worker_2" do |worker_2|
+        worker_2.vm.box = "ubuntu/focal64"
+        # worker_2.vm.synced_folder ".", "/vagrant", disabled: true
+        worker_2.vbguest.no_remote = true
+        worker_2.vbguest.auto_update = false
+        worker_2.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.52"
+        worker_2.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "worker_2"
+        end
+    end
+end

@@ -1,0 +1,65 @@
+---
+- name: Atualização do repositório ubuntu
+  become: true
+  shell: apt-get update -y
+
+- name: Instalação do MariaDB
+  become: true
+  apt:
+    name:
+      - mariadb-server
+      - python3-mysqldb
+    state: latest
+
+- name: Inicialização do serviço MariaDB
+  become: true
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: Permite acesso 0.0.0.0
+  become: true 
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: "bind-address            = 127.0.0.1"
+    line: "bind-address            = 0.0.0.0"
+    state: present
+
+- name: Permite porta 3306
+  become: true 
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: "#port                   = 3306"
+    line: "port                   = 3306"
+    state: present
+
+- name: Cria uma nova base com o nome "suitecrm"
+  become: true
+  community.mysql.mysql_db:
+    name: '{{ mysql_suitecrm_database }}'
+    state: present
+
+- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+  become: true
+  community.mysql.mysql_user:
+    name: '{{ mysql_user }}'
+    password: '{{ mysql_password }}'
+    priv: '*.*:ALL,GRANT'
+    state: present
+
+- name: Garante privilégio de conexão para o usuário  "{{ mysql_root_user }}"  vindo do IP {{ suitecrm_ip }}
+  become: true 
+  community.mysql.mysql_query:
+    login_user: '{{ mysql_user }}'
+    login_password: '{{ mysql_password }}'
+    query: 
+    - GRANT ALL ON suitecrm.* to '{{ mysql_user }}'@'%' IDENTIFIED BY '{{ mysql_password }}';
+    - FLUSH PRIVILEGES;
+    single_transaction: yes
+
+- name: Reinicio do serviço MariaDB para aplicação de mudanças
+  become: true
+  ansible.builtin.systemd:
+    name: mariadb.service
+    state: restarted

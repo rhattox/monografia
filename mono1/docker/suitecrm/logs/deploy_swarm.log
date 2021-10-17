@@ -1,0 +1,11 @@
+Começo dos testes DEPLOY SWARM (DOCKERHUB) em: 2021-09-14 às 14:22:06
+DEPLOY APP (suitecrm) e DB em: 2021-09-14 às 14:22:06
+Ignoring unsupported options: build
+
+Creating network suitecrm_geral_default
+Creating service suitecrm_geral_mariadb
+Creating service suitecrm_geral_suitecrm
+Sleep de 10s
+Finalização da rodada DEPLOY APP (suitecrm) e DB (mariaDB) em: 2021-09-14 às 14:22:22
+
+FINAL DA INSTALAÇÃO -- 14:26:00

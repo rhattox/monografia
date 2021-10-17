@@ -1,0 +1,68 @@
+---
+- name: Atualização do repositório ubuntu
+  become: true
+  shell: apt-get update -y
+
+- name: Instalação PHP "{{ php_version }}" (módulos) + Zip
+  become: true
+  apt:
+    name:
+      - "{{ php_version }}"
+      - zip
+      - "{{ php_version }}-mysql"
+      - "{{ php_version }}-xml"
+      - "{{ php_version }}-zip"
+    state: latest
+
+- name: Inicia o serviço do apache2
+  become: true
+  service:
+    name: apache2
+    enabled: true
+    state: started
+
+- name: Baixa o arquivo compactado do suitecrm e extrai para /home/
+  become: true
+  ansible.builtin.unarchive:
+    src: https://suitecrm.com{{ suitecrm_url }}
+    dest: /home/
+    remote_src: yes
+
+- name: Cópia da pasta /home/{{ suitecrm_version }}/ para a pasta /var/www/html/
+  become: true
+  ansible.builtin.copy:
+    src:  /home/{{ suitecrm_version }}/
+    dest: /var/www/html
+    owner: www-data
+    group: www-data
+    mode: "0775" 
+    remote_src: yes
+    directory_mode: yes
+
+- name: Atualização de permissões para a pasta /var/www/html/custom/
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/custom/
+    owner: www-data
+    group: www-data
+    mode: '0766'
+
+- name: Definindo permissões para os diretórios "{{ item.path }}"
+  become: true
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: '0777'
+  loop:
+    - { path: /var/www/html/cache/ }  
+    - { path: /var/www/html/cache/images } 
+    - { path: /var/www/html/cache/layout } 
+    - { path: /var/www/html/cache/pdf } 
+    - { path: /var/www/html/cache/xml } 
+    - { path: /var/www/html/cache/include/javascript }
+
+- name: Remove o arquivo /var/www/html/index.html
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/index.html
+    state: absent
