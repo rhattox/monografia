@@ -1,16 +1,16 @@
 Vagrant.configure("2") do |config|
-    config.vm.synced_folder "docker/", "/vagrant", :mount_options => ["dmode=777", "fmode=666"]
-    #manager
-    config.vm.define "manager" do |manager|
-        manager.vm.box = "ubuntu/focal64"
-        # manager.vm.synced_folder ".", "/vagrant", disabled: true
-        manager.vbguest.no_remote = true
-        manager.vbguest.auto_update = false
-        manager.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.50"
-        manager.vm.provider "virtualbox" do |v|     
+    config.vm.synced_folder ".", "/vagrant", type:"virtualbox"
+    #docker_manager
+    config.vm.define "docker_manager" do |docker_manager|
+        docker_manager.vm.box = "ubuntu/focal64"
+        # docker_manager.vm.synced_folder ".", "/vagrant", disabled: true
+        docker_manager.vbguest.no_remote = true
+        docker_manager.vbguest.auto_update = false
+        docker_manager.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.50"
+        docker_manager.vm.provider "virtualbox" do |v|     
             v.memory= 2048
             v.cpus = 2
-            v.name = "manager"
+            v.name = "docker_manager"
         end
     end
     #worker_1
