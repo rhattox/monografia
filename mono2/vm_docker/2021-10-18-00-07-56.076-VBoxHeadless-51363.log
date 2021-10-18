@@ -1,0 +1,12 @@
+Log created: 2021-10-18T00:07:56.764636000Z
+Process ID:  51363 (0xc8a3)
+Parent PID:  1 (0x1)
+Executable:  /usr/lib/virtualbox/VBoxHeadless
+Arg[0]: /usr/lib/virtualbox/VBoxHeadless
+Arg[1]: --comment
+Arg[2]: docker_manager
+Arg[3]: --startvm
+Arg[4]: ca0c3e5d-6b37-4f92-8ec8-2403baaa3d0a
+Arg[5]: --vrde
+Arg[6]: config
+AddRef: illegal refcnt=3221225469 state=2

@@ -1,0 +1,8 @@
+[dockermgr]
+192.168.1.50    ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/git/monografia/mono2/vm_docker/.vagrant/machines/docker_manager/virtualbox/private_key"
+
+[dockerwkr01]
+192.168.1.51    ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/git/monografia/mono2/vm_docker/.vagrant/machines/docker_worker_1/virtualbox/private_key"
+
+[dockerwkr02]
+192.168.1.52    ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/git/monografia/mono2/vm_docker/.vagrant/machines/docker_worker_2/virtualbox/private_key"

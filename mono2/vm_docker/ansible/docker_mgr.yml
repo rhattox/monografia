@@ -1,0 +1,6 @@
+---
+- hosts: dockermgr
+  roles:
+    - docker
+    - swarm
+    
