@@ -2,5 +2,4 @@
 - hosts: dockermgr
   roles:
     - docker
-    - swarm
-    
+    - swarm_init

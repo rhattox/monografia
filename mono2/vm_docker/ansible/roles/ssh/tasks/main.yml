@@ -1,0 +1,3 @@
+---
+- name: "Start ssh"
+  shell: echo 'ssh sucesso!'

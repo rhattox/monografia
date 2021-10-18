@@ -1,9 +1,0 @@
----
-- name: "Salva o arquivo de join do swarm"
-  shell:  echo '#!/bin/bash' > swarm.sh | docker -H 192.168.1.50  swarm join-token worker | tail -n2 >> swarm.sh
-
-- name: "Permissão para o arquivo"
-  shell: chmod +x swarm.sh
-
-- name: "Entra para o Swarm"
-  shell: bash swarm.sh
