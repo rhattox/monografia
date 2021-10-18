@@ -23,10 +23,12 @@ rm -f $LOCALIZACAO_HOSTS
 
 sleep 1
 
-echo "Inicialização VAGRANT da máquina virtual docker_manager docker_worker_1 docker_worker_2 em: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
+echo "Inicialização da automação VAGRANT da máquina virtual docker_manager docker_worker_1 docker_worker_2 em: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
 vagrant up docker_manager docker_worker_1 docker_worker_2 >> $LOCALIZACAO_LOGS
 
 echo "Máquinas docker_manager docker_worker_1  docker_worker_2 inicializadas, tempo de espera de  para normalização do uso de processamento: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
 sleep 1
 
-ansible-playbook /home/dev/git/monografia/mono2/vm_docker/ansible/ssh.yml -i /home/dev/git/monografia/mono2/vm_docker/ansible/hosts
+ansible-playbook /home/dev/git/monografia/mono2/vm_docker/ansible/ssh.yml -i /home/dev/git/monografia/mono2/vm_docker/ansible/hosts 2>&1>> $LOCALIZACAO_LOGS 
+
+echo "FINALIZAÇÃO AUTOMAÇÃO VAGRANT COM INSTALAÇÃO DOCKER,  tempo de espera de 2 segundos para normalização do uso de processamento: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 

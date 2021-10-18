@@ -3,7 +3,7 @@
 # Script para provisionamento + inicialização das máquina virtuais por meio do vagrant.
 
 # DELCARAÇÃO VARIÁVEIS
-SCRIPT_NOME=docker_swarm
+SCRIPT_NOME=swarm_geral
 
 data_de_hoje(){
     date +%Y-%m-%d
@@ -30,4 +30,6 @@ sleep 10
 
 echo "Começo do deploy da aplicação no SWARM em: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
 
-ansible-playbook /home/dev/git/monografia/mono2/vm_docker/ansible/docker_deploy.yml -i /home/dev/git/monografia/mono2/vm_docker/ansible/hosts
+ansible-playbook /home/dev/git/monografia/mono2/vm_docker/ansible/docker_deploy.yml -i /home/dev/git/monografia/mono2/vm_docker/ansible/hosts 2>&1>> $LOCALIZACAO_LOGS 
+
+echo "FINALIZAÇÃO DE TODOS OS SERVIÇOS SWARM, tempo de espera de 15 segundos para normalização do uso de processamento: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
