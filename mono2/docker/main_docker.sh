@@ -15,9 +15,11 @@ TEMPO_DE_LONGO=120
 echo "Começo do script $SCRIPT_NOME em: $SCRIPT_DATA às $SCRIPT_TEMPO." 2>&1>> $LOCALIZACAO_LOGS 
 
 echo "Inicio do build em: $SCRIPT_DATA às $SCRIPT_TEMPO." 2>&1>> $LOCALIZACAO_LOGS 
-./create_vms.sh 
+
+docker-compose build
 
 echo "Inicio do deploy em: $SCRIPT_DATA às $SCRIPT_TEMPO." 2>&1>> $LOCALIZACAO_LOGS 
-./deploy_vms.sh
+
+docker-compose up -d
 
 sleep
