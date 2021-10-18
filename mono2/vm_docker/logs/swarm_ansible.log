@@ -1,0 +1,3 @@
+Começo do scrpit swarm_ansible em: 2021-10-18 às 17:04:05.
+Inicialização ANSIBLE em: 2021-10-18 às 17:04:05.
+Máquinas COM DOCKER INSTALADO E SWARM INICIALIZADO docker_worker_1  docker_worker_2 inicializadas, tempo de espera de  para normalização do uso de processamento: 2021-10-18 às 17:05:19.

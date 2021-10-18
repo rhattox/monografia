@@ -1,0 +1,20 @@
+---
+- name: "Cria o caminho para o serviço SWARM"
+  become: true
+  shell:  mkdir -p /opt/docker/swarm
+
+- name: "Direitos de pasta"
+  become: true
+  shell:  chown -R vagrant:vagrant /opt/docker/swarm
+
+- name: Copy 
+  copy:
+    src: files/docker-swarm.yml
+    dest: /opt/docker/swarm/docker-swarm.yml
+    owner: vagrant
+    group: vagrant
+    mode: '0777'
+
+- name: "Deploy da stack"
+  become: true
+  shell: docker stack deploy -c /opt/docker/swarm/docker-swarm.yml suitecrm_stack

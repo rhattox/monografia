@@ -3,7 +3,7 @@
 # Script para provisionamento + inicialização das máquina virtuais por meio do vagrant.
 
 # DELCARAÇÃO VARIÁVEIS
-SCRIPT_NOME=docker_swarm
+SCRIPT_NOME=swarm_vagrant
 
 data_de_hoje(){
     date +%Y-%m-%d
@@ -23,7 +23,7 @@ rm -f $LOCALIZACAO_HOSTS
 
 sleep 1
 
-echo "Inicialização VAGRANT da máquina virtual docker_manager em: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
+echo "Inicialização VAGRANT da máquina virtual docker_manager docker_worker_1 docker_worker_2 em: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
 vagrant up docker_manager docker_worker_1 docker_worker_2 >> $LOCALIZACAO_LOGS
 
 echo "Máquinas docker_manager docker_worker_1  docker_worker_2 inicializadas, tempo de espera de  para normalização do uso de processamento: $(data_de_hoje) às $(segundo_agora)." 2>&1>> $LOCALIZACAO_LOGS 
