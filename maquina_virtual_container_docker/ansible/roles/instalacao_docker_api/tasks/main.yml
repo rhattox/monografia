@@ -1,0 +1,21 @@
+---
+- name: "Cria o caminho para o serviço"
+  become: true
+  shell:  mkdir -p /etc/systemd/system/docker.service.d/
+
+- name: "Copia o arquivo para o caminho"
+  become: yes
+  copy:
+    src: files/override.conf
+    dest: /etc/systemd/system/docker.service.d/override.conf
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: "Recarrega o daemon DOCKER"
+  become: true
+  shell: systemctl daemon-reload
+
+- name: "Reinicia o serviço DOCKER"
+  become: true
+  shell: systemctl restart docker.service

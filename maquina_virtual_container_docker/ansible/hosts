@@ -1,0 +1,8 @@
+[manager]
+192.168.1.50 ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/monografia/maquina_virtual_container_docker/.vagrant/machines/docker_manager/virtualbox/private_key"
+
+[worker_1]
+192.168.1.51 ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/monografia/maquina_virtual_container_docker/.vagrant/machines/docker_worker_1/virtualbox/private_key"
+
+[worker_2]
+192.168.1.52 ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/monografia/maquina_virtual_container_docker/.vagrant/machines/docker_worker_2/virtualbox/private_key"

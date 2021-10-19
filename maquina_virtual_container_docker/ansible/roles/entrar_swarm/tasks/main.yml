@@ -1,0 +1,9 @@
+---
+- name: "Salva o arquivo de entrar para o SWARM"
+  shell:  echo '#!/bin/bash' > /tmp/swarm.sh | docker -H 192.168.1.50  swarm join-token worker | tail -n2 >> /tmp/swarm.sh
+
+- name: "Concede permissão para o arquivo ser executado"
+  shell: chmod +x /tmp/swarm.sh
+
+- name: "Executa o arquivo para entrar no SWARM"
+  shell: bash /tmp/swarm.sh

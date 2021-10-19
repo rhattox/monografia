@@ -1,0 +1,96 @@
+##########################################################################
+# COMEÇO DO SCRIPT implementar_maquinas_virtuais_swarm em: 2021-10-19 às 01:17:08. #
+##########################################################################
+
+
+INCIO DO ANSIBLE, MÁQUINA VIRTUAL instalacao_manager, em: 2021-10-19 às 01:17:08.
+
+PLAY [manager] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.1.50]
+
+TASK [instalacao_docker_api : Cria o caminho para o serviço] *******************
+changed: [192.168.1.50]
+
+TASK [instalacao_docker_api : Copia o arquivo para o caminho] ******************
+changed: [192.168.1.50]
+
+TASK [instalacao_docker_api : Recarrega o daemon DOCKER] ***********************
+changed: [192.168.1.50]
+
+TASK [instalacao_docker_api : Reinicia o serviço DOCKER] ***********************
+changed: [192.168.1.50]
+
+TASK [inicializacao_swarm : Inicialização do SWARM] ****************************
+changed: [192.168.1.50]
+
+PLAY RECAP *********************************************************************
+192.168.1.50               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+FIM DO ANSIBLE, MÁQUINA VIRTUAL instalacao_manager,em: 2021-10-19 às 01:17:27.
+INCIO DO ANSIBLE, MÁQUINA VIRTUAL instalacao_worker_1, em: 2021-10-19 às 01:17:32.
+
+PLAY [worker_1] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.1.51]
+
+TASK [instalacao_docker_api : Cria o caminho para o serviço] *******************
+changed: [192.168.1.51]
+
+TASK [instalacao_docker_api : Copia o arquivo para o caminho] ******************
+changed: [192.168.1.51]
+
+TASK [instalacao_docker_api : Recarrega o daemon DOCKER] ***********************
+changed: [192.168.1.51]
+
+TASK [instalacao_docker_api : Reinicia o serviço DOCKER] ***********************
+changed: [192.168.1.51]
+
+TASK [entrar_swarm : Salva o arquivo de entrar para o SWARM] *******************
+changed: [192.168.1.51]
+
+TASK [entrar_swarm : Concede permissão para o arquivo ser executado] ***********
+changed: [192.168.1.51]
+
+TASK [entrar_swarm : Executa o arquivo para entrar no SWARM] *******************
+changed: [192.168.1.51]
+
+PLAY RECAP *********************************************************************
+192.168.1.51               : ok=8    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+FIM DO ANSIBLE, MÁQUINA VIRTUAL instalacao_worker_1,em: 2021-10-19 às 01:17:53.
+INCIO DO ANSIBLE, MÁQUINA VIRTUAL instalacao_worker_2, em: 2021-10-19 às 01:17:59.
+
+PLAY [worker_2] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.1.52]
+
+TASK [instalacao_docker_api : Cria o caminho para o serviço] *******************
+changed: [192.168.1.52]
+
+TASK [instalacao_docker_api : Copia o arquivo para o caminho] ******************
+changed: [192.168.1.52]
+
+TASK [instalacao_docker_api : Recarrega o daemon DOCKER] ***********************
+changed: [192.168.1.52]
+
+TASK [instalacao_docker_api : Reinicia o serviço DOCKER] ***********************
+changed: [192.168.1.52]
+
+TASK [entrar_swarm : Salva o arquivo de entrar para o SWARM] *******************
+changed: [192.168.1.52]
+
+TASK [entrar_swarm : Concede permissão para o arquivo ser executado] ***********
+changed: [192.168.1.52]
+
+TASK [entrar_swarm : Executa o arquivo para entrar no SWARM] *******************
+changed: [192.168.1.52]
+
+PLAY RECAP *********************************************************************
+192.168.1.52               : ok=8    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+FIM DO ANSIBLE, MÁQUINA VIRTUAL instalacao_worker_2,em: 2021-10-19 às 01:18:19.
+FIM DO SCRIPT implementar_maquinas_virtuais_swarm, TEMPO GASTO EM ESPERA 15 SEGUNDOS em: 2021-10-19 às 01:18:24.

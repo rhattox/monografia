@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    image: suitecrm_mono
+    ports:
+      - "5000:80"
+    volumes:
+      - 'suitecrm_data:/bitnami/suitecrm'
+    depends_on:
+      - db
+  db:
+    image: mariadb:10.3.31
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=suitecrm
+      - MARIADB_DATABASE=suitecrm
+      - MARIADB_ROOT_PASSWORD=root
+    volumes:
+      - 'mariadb_data:/mariadb'
+
+volumes:
+  mariadb_data:
+    driver: local
+  suitecrm_data:
+    driver: local

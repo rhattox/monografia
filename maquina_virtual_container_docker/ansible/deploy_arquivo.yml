@@ -1,0 +1,4 @@
+---
+- hosts: manager
+  roles:
+    - deploy_arquivo

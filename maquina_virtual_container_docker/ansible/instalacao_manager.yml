@@ -1,0 +1,5 @@
+---
+- hosts: manager
+  roles:
+    - instalacao_docker_api
+    - inicializacao_swarm

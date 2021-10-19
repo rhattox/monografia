@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+    #mariadb
+    config.vm.define "mariadb" do |mariadb|
+        mariadb.vm.box = "ubuntu/focal64"
+        mariadb.vm.synced_folder "mariadb", "/vagrant", disabled: true
+        mariadb.vbguest.no_remote = true
+        mariadb.vbguest.auto_update = false
+        mariadb.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.40"
+        mariadb.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "mariadb"
+        end
+    end
+    #suitecrm
+    config.vm.define "suitecrm" do |suitecrm|
+        suitecrm.vm.box = "ubuntu/focal64"
+        suitecrm.vm.synced_folder "suitecrm", "/vagrant", disabled: true
+        suitecrm.vbguest.no_remote = true
+        suitecrm.vbguest.auto_update = false
+        suitecrm.vm.network "public_network", bridge: "enp0s31f6", ip: "192.168.1.41"
+        suitecrm.vm.provider "virtualbox" do |v|     
+            v.memory= 2048
+            v.cpus = 2
+            v.name = "suitecrm"
+        end
+    end
+end

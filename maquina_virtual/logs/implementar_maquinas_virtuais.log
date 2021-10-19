@@ -1,0 +1,86 @@
+##########################################################################
+# COMEÇO DO SCRIPT implementar_maquinas_virtuais em: 2021-10-19 às 00:36:35. #
+##########################################################################
+
+
+Remoção de arquivos de HOST de SSH em: ~/.ssh/known_hosts:  2021-10-19 às 00:36:35.
+Removido arquivo, tempo de espera de (5) para normalização do uso de processamento: 2021-10-19 às 00:36:35.
+INCIO DO ANSIBLE, MÁQUINA VIRTUAL SUITECRM, em: 2021-10-19 às 00:36:35.
+
+PLAY [suitecrm] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.1.41]
+
+TASK [suitecrm : Atualização do repositório ubuntu] ****************************
+changed: [192.168.1.41]
+
+TASK [suitecrm : Instalação PHP "php7.4" (módulos) + Zip] **********************
+changed: [192.168.1.41]
+
+TASK [suitecrm : Inicia o serviço do apache2] **********************************
+ok: [192.168.1.41]
+
+TASK [suitecrm : Baixa o arquivo compactado do suitecrm e extrai para /home/] ***
+changed: [192.168.1.41]
+
+TASK [suitecrm : Cópia da pasta /home/SuiteCRM-7.11.21/ para a pasta /var/www/html/] ***
+changed: [192.168.1.41]
+
+TASK [suitecrm : Atualização de permissões para a pasta /var/www/html/custom/] ***
+changed: [192.168.1.41]
+
+TASK [suitecrm : Definindo permissões para os diretórios "{{ item.path }}"] ****
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/images'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/layout'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/pdf'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/xml'})
+changed: [192.168.1.41] => (item={'path': '/var/www/html/cache/include/javascript'})
+
+TASK [suitecrm : Remove o arquivo /var/www/html/index.html] ********************
+changed: [192.168.1.41]
+
+PLAY RECAP *********************************************************************
+192.168.1.41               : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+FIM DO ANSIBLE, MÁQUINA VIRTUAL SUITECRM,em: 2021-10-19 às 00:37:37.
+INCIO DO ANSIBLE, MÁQUINA VIRTUAL MARIADB, em: 2021-10-19 às 00:37:42.
+
+PLAY [mariadb] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.1.40]
+
+TASK [mariadb : Atualização do repositório ubuntu] *****************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Instalação do MariaDB] *****************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Inicialização do serviço MariaDB] ******************************
+ok: [192.168.1.40]
+
+TASK [mariadb : Permite acesso 0.0.0.0] ****************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Permite porta 3306] ********************************************
+changed: [192.168.1.40]
+
+TASK [mariadb : Cria uma nova base com o nome "suitecrm"] **********************
+changed: [192.168.1.40]
+
+TASK [mariadb : Create database user with password and all database privileges and 'WITH GRANT OPTION'] ***
+changed: [192.168.1.40]
+
+TASK [mariadb : Garante privilégio de conexão para o usuário  "{{ mysql_root_user }}"  vindo do IP {{ suitecrm_ip }}] ***
+ok: [192.168.1.40]
+
+TASK [mariadb : Reinicio do serviço MariaDB para aplicação de mudanças] ********
+changed: [192.168.1.40]
+
+PLAY RECAP *********************************************************************
+192.168.1.40               : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+FIM DO ANSIBLE, MÁQUINA VIRTUAL MARIADB,em: 2021-10-19 às 00:38:26.
+FIM DO SCRIPT implementar_maquinas_virtuais, TEMPO GASTO EM ESPERA 10 SEGUNDOS em: 2021-10-19 às 00:38:31.

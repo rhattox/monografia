@@ -1,5 +1,0 @@
----
-- hosts: dockerwkr02
-  roles:
-    - docker
-    - swarm_join

@@ -1,5 +1,0 @@
----
-- hosts: 
-    - suitecrm
-  roles:
-    - suitecrm

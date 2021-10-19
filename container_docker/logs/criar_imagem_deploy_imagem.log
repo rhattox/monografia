@@ -1,0 +1,10 @@
+##########################################################################
+# COMEÇO DO SCRIPT criar_imagem_deploy_imagem em: 2021-10-18 às 23:46:39. #
+##########################################################################
+
+
+INÍCIO do DOCKER-COMPOSE BUILD em: 2021-10-18 às 23:46:39.
+FIM do DOCKER-COMPOSE BUILD em: 2021-10-18 às 23:47:35.
+INÍCIO do DOCKER-COMPOSE DEPLOY em: 2021-10-18 às 23:47:40.
+FIM do DOCKER-COMPOSE DEPLOY em: 2021-10-18 às 23:47:54.
+FIM DO SCRIPT criar_imagem_deploy_imagem, TEMPO GASTO EM ESPERA 5 SEGUNDOS + 12 minutos em: 2021-10-18 às 23:59:54.

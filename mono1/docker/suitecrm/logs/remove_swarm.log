@@ -1,7 +1,0 @@
-Começo dos testes REMOVE SWARM (DOCKERHUB) em: 2021-09-14 às 14:41:58
-REMOVE SWARM APP (suitecrm) e DB em: 2021-09-14 às 14:41:58
-Removing service suitecrm_geral_mariadb
-Removing service suitecrm_geral_suitecrm
-Removing network suitecrm_geral_default
-Sleep de 10s
-Finalização da rodada REMOVE SWARM APP (suitecrm) e DB (mariaDB) em: 2021-09-14 às 14:42:08

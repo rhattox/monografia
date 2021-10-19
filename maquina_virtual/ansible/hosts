@@ -1,0 +1,5 @@
+[mariadb]
+192.168.1.40     ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/monografia/maquina_virtual/.vagrant/machines/mariadb/virtualbox/private_key"
+
+[suitecrm]
+192.168.1.41     ansible_user=vagrant ansible_ssh_private_key_file="/home/dev/monografia/maquina_virtual/.vagrant/machines/suitecrm/virtualbox/private_key"

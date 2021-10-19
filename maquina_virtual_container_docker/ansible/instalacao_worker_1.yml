@@ -1,0 +1,5 @@
+---
+- hosts: worker_1
+  roles:
+    - instalacao_docker_api
+    - entrar_swarm

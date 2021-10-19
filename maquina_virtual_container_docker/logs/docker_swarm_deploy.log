@@ -1,0 +1,28 @@
+##########################################################################
+# COMEÇO DO SCRIPT docker_swarm_deploy em: 2021-10-19 às 01:18:34. #
+##########################################################################
+
+
+INÍCIO do deploy da aplicação no SWARM em: 2021-10-19 às 01:18:34.
+
+PLAY [manager] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [192.168.1.50]
+
+TASK [deploy_arquivo : Criar pasta para o swarm] *******************************
+changed: [192.168.1.50]
+
+TASK [deploy_arquivo : Direitos de pasta] **************************************
+changed: [192.168.1.50]
+
+TASK [deploy_arquivo : Copy] ***************************************************
+changed: [192.168.1.50]
+
+TASK [deploy_arquivo : Deploy da stack] ****************************************
+changed: [192.168.1.50]
+
+PLAY RECAP *********************************************************************
+192.168.1.50               : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+FIM DO SCRIPT docker_swarm_deploy, TEMPO GASTO EM ESPERA 5 SEGUNDOS em: 2021-10-19 às 01:18:48.
